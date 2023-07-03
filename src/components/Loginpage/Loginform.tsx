@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik, Form, Field, FormikValues } from "formik";
 import * as Yup from "yup";
+import { AuthContext } from "../../store/auth-context";
+import { useNavigate } from "react-router-dom";
 
 const Loginform: React.FC = () => {
+  const { setToken } = useContext(AuthContext);
   const loginSchema = Yup.object().shape({
     name: Yup.string().trim().required("Please enter a valid username"),
     password: Yup.string()
       .required("No password provided.")
       .min(8, "Password is too short - should be 8 chars minimum."),
   });
+  const navigate = useNavigate();
 
   const loginHandler = async (values: FormikValues) => {
     const data = { username: values.name, password: values.password };
@@ -20,7 +24,15 @@ const Loginform: React.FC = () => {
       headers: { "Content-Type": "application/json" },
       credentials: "include",
     });
-    console.log(response);
+
+    if (response.ok) {
+      const serverData = await response.json();
+      const { token, expirationTime } = serverData;
+      setToken(token, expirationTime);
+      navigate("/admin");
+    } else {
+      console.log(response);
+    }
   };
 
   return (

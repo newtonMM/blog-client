@@ -8,4 +8,5 @@ export interface IArticle {
   series_name: string | null;
   date_updated: string;
   date_published: string;
+  description: string;
 }

@@ -1,5 +1,7 @@
 import React, { ReactNode, useState, useEffect } from "react";
 import { IArticle } from "../@types/IArticles";
+import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 type ArticleContextObj = {
   articles: IArticle[];
@@ -19,13 +21,14 @@ const ArticleContextProvider: React.FC<{ children?: ReactNode | undefined }> = (
   props
 ) => {
   const [articles, setArticles] = useState<IArticle[]>([]);
+  // const navigate = useNavigate();
 
   const fetchArticles = async () => {
     const response = await fetch("http://localhost:3000/all-articles");
     const data = await response.json();
     const mappedArticles = data.response.map((itsm: IArticle) => ({
       id: itsm.id,
-      image_url: "http:localhost:3000/" + itsm.image_url,
+      image_url: itsm.image_url,
       content: itsm.content,
       author_id: itsm.author_id,
       title: itsm.title,
@@ -33,6 +36,7 @@ const ArticleContextProvider: React.FC<{ children?: ReactNode | undefined }> = (
       series_id: itsm.series_name,
       date_updated: itsm.date_updated,
       date_published: itsm.date_published,
+      description: itsm.description,
     }));
     console.log(mappedArticles);
     setArticles(mappedArticles);
@@ -48,6 +52,10 @@ const ArticleContextProvider: React.FC<{ children?: ReactNode | undefined }> = (
       body: data,
       credentials: "include",
     });
+    if (response.ok) {
+      <Navigate to="/admin" />;
+      // navigate("/admin");
+    }
     console.log(response);
   };
   const deleteArticleHandler = () => {};

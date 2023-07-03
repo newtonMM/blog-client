@@ -1,22 +1,21 @@
-import React from "react";
-import CreateCategory from "../containers/Admin/CreateCategory";
-import CreatePostForm from "../containers/Admin/CreatePost/Create-post-form";
+import React, { useContext } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { AuthContext } from "../store/auth-context";
+import Navbar from "../components/Navbar";
 
-const Layouts = [
-  {
-    path: "/admin/create-category",
-    component: CreateCategory,
-    exact: true,
-    role: "admin",
-    title: "create new category",
-  },
-  {
-    path: "/admin/create-post",
-    component: CreatePostForm,
-    exact: true,
-    role: "admin",
-    title: "create new post",
-  },
-];
+const AdminLayout = () => {
+  const { isLoggedIn } = useContext(AuthContext);
 
-export default Layouts;
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
+
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+    </>
+  );
+};
+
+export default AdminLayout;

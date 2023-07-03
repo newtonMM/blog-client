@@ -7,7 +7,6 @@ type categories = {
   id: string;
   name: string;
 };
-// interface getContentChange:
 
 const CreatePostForm = () => {
   const [categoriesOptions, setCategoriesOptions] = useState<categories[]>([]);
@@ -15,6 +14,7 @@ const CreatePostForm = () => {
   const [content, setContent] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<File | string>("");
   const [category, setCategory] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
 
   const artCtx = useContext(ArticleContext);
   const fetchcategories = async () => {
@@ -46,7 +46,16 @@ const CreatePostForm = () => {
     formData.append("image", selectedFile);
     formData.append("category_id", category);
     formData.append("content", content);
+    formData.append("description", description);
+    console.log(formData);
     artCtx.addArticle(formData);
+  };
+
+  const onDescriptionChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    event.preventDefault();
+    setDescription(event.currentTarget.value.trim());
   };
 
   const onTitleChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,12 +84,10 @@ const CreatePostForm = () => {
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     event.preventDefault();
-    console.log(event.currentTarget.value);
+
     setCategory(event.currentTarget.value);
   };
-  const test = () => {
-    console.log("test.....");
-  };
+
   return (
     <div>
       <h1>CreatePost</h1>
@@ -94,6 +101,14 @@ const CreatePostForm = () => {
           <div>
             <label>Image </label>
             <input type="file" onChange={onImageSelectHandler}></input>
+          </div>
+          <div>
+            <label>Excerpt</label>
+            <input
+              type="text-area"
+              onChange={onDescriptionChangeHandler}
+              placeholder="a short extract of the content or a description of the article"
+            ></input>
           </div>
           <div>
             <label>category</label>
