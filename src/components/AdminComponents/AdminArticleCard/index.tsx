@@ -18,18 +18,27 @@ const AdminArticleCard: React.FC<Items> = (props) => {
     props.onDelete(id);
   };
   return (
-    <div>
-      <div>
-        <h1>{props.title}</h1>
-        <div>
-          <img src={props.imgSrc} />
+    <div className="w-96 h-[60vh]">
+      <div className="flex flex-col">
+        <h1 className="text-2xl text-white text-center h-auto w-auto mb-2">
+          {props.title}
+        </h1>
+        <div className="h-[40vh]">
+          <img src={props.imgSrc} className="h-full w-full" />
         </div>
-        <p>{props.description}</p>
+        <p className="text-xl w-auto">{props.description}</p>
       </div>
-      <div>
-        <div onClick={onDeletehandler}>Delete</div>
-        <div onClick={() => navigate(`${props.id}/edit`)}>Edit</div>
-        <div>View</div>
+      <div className="flex gap-2 ">
+        <div onClick={onDeletehandler} className="p-2 bg-white text-black">
+          Delete
+        </div>
+        <div
+          onClick={() => navigate(`edit/${props.id}`)}
+          className="p-2 bg-white text-black"
+        >
+          Edit
+        </div>
+        <div className="p-2 bg-white text-black">View</div>
       </div>
     </div>
   );

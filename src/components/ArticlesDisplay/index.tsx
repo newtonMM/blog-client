@@ -33,7 +33,7 @@ const ArticlesDisplay: React.FC = (props) => {
   // ));
 
   return (
-    <div className="flex flex-wrap gap-10 justify-center items-center">
+    <div className="flex flex-wrap gap-2 justify-center items-center bg-base-50">
       {cards}
     </div>
   );

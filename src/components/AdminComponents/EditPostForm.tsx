@@ -41,7 +41,9 @@ const EditPostForm = () => {
       const { data } = await response.json();
       //   const arts = { ...data };
       console.log("this is the data ", data);
+      const { content } = data;
       setArticle({ ...data });
+      setContent(content);
     } else {
       console.log(response);
     }
@@ -206,10 +208,7 @@ const EditPostForm = () => {
           </select>
         </div>
         <div>
-          <ReactQuill
-            value={artcicle?.content}
-            onChange={onContentChangeHandler}
-          />
+          <ReactQuill value={content} onChange={onContentChangeHandler} />
         </div>
 
         <button type="submit">Submit</button>

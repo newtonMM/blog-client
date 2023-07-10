@@ -6,7 +6,7 @@ interface ArticleData {
   title: string;
   image_url: string;
   description: string;
-  author: string;
+  author_username: string;
   date_published: string;
   content: string;
   id: string;
@@ -48,7 +48,7 @@ const AriclePage: React.FC = () => {
             title={artcicle.title}
             image_url={artcicle.image_url}
             description={artcicle.description}
-            author={artcicle.author}
+            author={artcicle.author_username}
             content={artcicle.content}
             id={artcicle.id}
             date_published={artcicle.date_published}

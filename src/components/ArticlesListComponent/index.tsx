@@ -17,13 +17,13 @@ const ArticleCard: React.FC<Items> = (props) => {
 
   return (
     <div
-      className="card w-96 bg-base-100 shadow-xl"
+      className="card w-96 h-[65vh] p-2 mb-2 overflow-hidden bg-base-100 shadow-xl"
       onClick={() => navigate(`${props.id}`)}
     >
-      <figure>
-        <img src={`${props.imgSrc}`} alt="Shoes" />
+      <figure className="h-1/2">
+        <img src={`${props.imgSrc}`} className="object-contain" alt="Shoes" />
       </figure>
-      <div className="card-body">
+      <div className="card-body h-1/2">
         <h2 className="card-title">{props.title}</h2>
         <p>{props.description}</p>
         <div className="card-actions justify-end">

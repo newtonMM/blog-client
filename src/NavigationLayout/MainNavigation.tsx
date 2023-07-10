@@ -25,7 +25,7 @@ const MainNavigation = () => {
       element: <AdminLayout />,
       children: [
         { index: true, element: <Dashboard /> },
-        { path: ":id/edit", element: <EditPostForm /> },
+        { path: "edit/:id", element: <EditPostForm /> },
         { path: "create-post", element: <CreatePostForm /> },
         { path: "create-category", element: <CreateCategory /> },
       ],

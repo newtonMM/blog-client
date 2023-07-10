@@ -60,15 +60,17 @@ const Dashboard: React.FC = () => {
     ));
   return (
     <div>
-      <div>
-        <div>My articles</div>
-        <div>My series</div>
-        <div>Create new Series</div>
-        <div>Create new Article</div>
+      <div className="flex gap-2 justify-center items-center mt-4 p-2">
+        <div className="p-2 bg-white text-black ">My articles</div>
+        <div className="p-2 bg-white text-black">My series</div>
+        <div className="p-2 bg-white text-black">Create new Series</div>
+        <div className="p-2 bg-white text-black">Create new Article</div>
       </div>
-      <div>
-        <h1>Your Articles </h1>
-        <div>{myArticles}</div>
+      <div id="articles" className="flex flex-col mt-5 p-4">
+        <h1 className="text-center text-3xl font-bold ">Your Articles </h1>
+        <div className="flex flex-col  gap-2 items-center justify-center">
+          {myArticles}
+        </div>
       </div>
     </div>
   );
